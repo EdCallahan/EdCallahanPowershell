@@ -1,0 +1,1 @@
+﻿. $PSScriptRoot\WallPaper.ps1
