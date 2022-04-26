@@ -30,6 +30,28 @@ function Write-SecretKeys
 
     )
 
+    <#
+
+    ---
+    --- The SQL table expected for $Table
+    ---
+
+    CREATE TABLE [dbo].[PasswordVault](
+        [Application] [NVARCHAR](50) NOT NULL,
+        [Username] [NVARCHAR](50) NOT NULL,
+        [Key] [NVARCHAR](50) NOT NULL,
+        [Value] [NVARCHAR](4000) NULL,
+        [ServerName] [NVARCHAR](50) NOT NULL,
+    CONSTRAINT [PK_PasswordVault] PRIMARY KEY CLUSTERED
+    (
+        [Application] ASC,
+        [Username] ASC,
+        [Key] ASC,
+        [ServerName] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+    ) ON [PRIMARY]
+    #>
+
     if ( $PSCmdlet.ParameterSetName -eq 'File' ) {
         $null = $Keys.GetEnumerator() |
             Where-Object { $_.Value -ne '' } |
